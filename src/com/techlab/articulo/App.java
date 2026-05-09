@@ -108,16 +108,28 @@ public class App {
         // TODO:
         // Crear aquí los repositorios genéricos.
 
-        // TODO:
-        // Crear aquí los menús y pasarles lo que necesiten por constructor.
         ArrayList<Categoria> categorias = new ArrayList<>();
-        MenuArticulos menuArticulos = new MenuArticulos(scanner,categorias);
-        MenuCategorias menuCategorias = new MenuCategorias(scanner,categorias);
+        MenuArticulos menuArticulos = new MenuArticulos(scanner, categorias);
+        MenuCategorias menuCategorias = new MenuCategorias(scanner, categorias);
 
-        // TODO:
-        // Implementar el menú principal de la aplicación.
-        menuArticulos.mostrarMenu();
-        menuArticulos.ejecutar();
+        int eleccion;
+        do {
+            System.out.println("\n========================================");
+            System.out.println("   SISTEMA DE GESTIÓN - TECHLAB");
+            System.out.println("========================================");
+            System.out.println("1 - Gestionar artículos");
+            System.out.println("2 - Gestionar categorías");
+            System.out.println("0 - Salir");
+            System.out.print("Elija una opción: ");
+            eleccion = scanner.nextInt();
+            scanner.nextLine();
+            switch (eleccion) {
+                case 1: menuArticulos.ejecutar(); break;
+                case 2: menuCategorias.ejecutar(); break;
+                case 0: System.out.println("¡Hasta luego!"); break;
+                default: System.out.println("Opción inválida. Intente de nuevo.");
+            }
+        } while (eleccion != 0);
 
         scanner.close();
     }
