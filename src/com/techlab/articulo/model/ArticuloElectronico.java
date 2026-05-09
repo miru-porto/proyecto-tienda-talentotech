@@ -31,22 +31,36 @@ public class ArticuloElectronico extends Articulo {
 
     private int garantiaMeses;
 
-    // TODO:
-    // Crear constructor.
+    public ArticuloElectronico(int codigo, String nombre, double precio, Categoria categoria, int garantiaMeses) {
+        super(codigo, nombre, precio, categoria);
+        this.garantiaMeses = garantiaMeses;
+    }
 
-    // TODO:
-    // Crear getters y setters.
+    public int getGarantiaMeses() {
+        return garantiaMeses;
+    }
+
+    public void setGarantiaMeses(int garantiaMeses) {
+        this.garantiaMeses = garantiaMeses;
+    }
 
     @Override
     public String getTipoArticulo() {
-        // TODO:
-        return "";
+        return "Electrónico";
     }
 
     @Override
     public double calcularPrecioFinal() {
-        // TODO:
-        // Implementar lógica propia del artículo electrónico.
-        return 0;
+        if (garantiaMeses > 12) return precio * 1.10;
+        return precio;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getTipoArticulo() + "] Código: " + codigo
+                + " | " + nombre
+                + " | Precio final: $" + calcularPrecioFinal()
+                + " | Garantía: " + garantiaMeses + " meses"
+                + " | Categoría: " + categoria;
     }
 }

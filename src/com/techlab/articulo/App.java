@@ -65,11 +65,13 @@ package com.techlab.articulo;
 //
 
 // Importamos Scanner para leer datos por consola.
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Importamos los menús que luego deberán completarse.
 import com.techlab.articulo.menu.MenuArticulos;
 import com.techlab.articulo.menu.MenuCategorias;
+import com.techlab.articulo.model.Categoria;
 
 public class App {
 
@@ -108,9 +110,14 @@ public class App {
 
         // TODO:
         // Crear aquí los menús y pasarles lo que necesiten por constructor.
+        ArrayList<Categoria> categorias = new ArrayList<>();
+        MenuArticulos menuArticulos = new MenuArticulos(scanner,categorias);
+        MenuCategorias menuCategorias = new MenuCategorias(scanner,categorias);
 
         // TODO:
         // Implementar el menú principal de la aplicación.
+        menuArticulos.mostrarMenu();
+        menuArticulos.ejecutar();
 
         scanner.close();
     }

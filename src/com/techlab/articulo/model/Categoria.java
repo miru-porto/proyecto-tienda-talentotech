@@ -34,11 +34,16 @@ public class Categoria implements Identificable {
 
     // TODO:
     // Crear constructor.
+    Categoria(int codigo, String nombre, String descripcion) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
     @Override
     public int getCodigo() {
         // TODO:
-        return 0;
+        return codigo;
     }
 
     // TODO:
@@ -47,6 +52,6 @@ public class Categoria implements Identificable {
     @Override
     public String toString() {
         // TODO:
-        return "";
+        return nombre + " " + descripcion;
     }
 }
