@@ -32,9 +32,7 @@ public class Categoria implements Identificable {
     private String nombre;
     private String descripcion;
 
-    // TODO:
-    // Crear constructor.
-    Categoria(int codigo, String nombre, String descripcion) {
+    public Categoria(int codigo, String nombre, String descripcion) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -42,16 +40,27 @@ public class Categoria implements Identificable {
 
     @Override
     public int getCodigo() {
-        // TODO:
         return codigo;
     }
 
-    // TODO:
-    // Crear getters y setters restantes.
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     @Override
     public String toString() {
-        // TODO:
-        return nombre + " " + descripcion;
+        return "Código: " + codigo + " | " + nombre + " | " + descripcion;
     }
 }

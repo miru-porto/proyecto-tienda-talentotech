@@ -42,10 +42,23 @@ package com.techlab.articulo.menu;
  * - eliminarCategoria()
  * - categoriaTieneArticulosAsociados(...)
  */
+
+import com.techlab.articulo.model.Articulo;
+import com.techlab.articulo.model.Categoria;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class MenuCategorias extends Menu {
 
-    public MenuCategorias(java.util.Scanner scanner) {
+    private ArrayList<Categoria> categorias;
+    private ArrayList<Articulo> articulos;
+    private int proximoCodigo = 1;
+
+    public MenuCategorias(Scanner scanner, ArrayList<Categoria> categorias, ArrayList<Articulo> articulos) {
         super(scanner);
+        this.categorias = categorias;
+        this.articulos = articulos;
     }
 
     @Override
@@ -61,10 +74,136 @@ public class MenuCategorias extends Menu {
 
     @Override
     public void ejecutar() {
-        // TODO:
-        // Implementar el loop del menú y llamar a los métodos correspondientes.
+        int eleccion;
+        do {
+            mostrarMenu();
+            System.out.print("Elija una opción: ");
+            eleccion = scanner.nextInt();
+            scanner.nextLine();
+            switch (eleccion) {
+                case 1: ingresarCategoria(); break;
+                case 2: listarCategorias(); break;
+                case 3: consultarCategoria(); break;
+                case 4: modificarCategoria(); break;
+                case 5: eliminarCategoria(); break;
+                case 0: System.out.println("Volviendo al menú principal..."); break;
+                default: System.out.println("Opción inválida. Intente de nuevo.");
+            }
+        } while (eleccion != 0);
     }
 
-    // TODO:
-    // Implementar todos los métodos del CRUD de categorías.
+    private void ingresarCategoria() {
+        System.out.print("Nombre de la categoría: ");
+        String nombre = scanner.nextLine();
+        if (nombre.isEmpty()) {
+            System.out.println("El nombre no puede estar vacío.");
+            return;
+        }
+        if (existeNombre(nombre)) {
+            System.out.println("Ya existe una categoría con ese nombre.");
+            return;
+        }
+
+        System.out.print("Descripción: ");
+        String descripcion = scanner.nextLine();
+        if (descripcion.isEmpty()) {
+            System.out.println("La descripción no puede estar vacía.");
+            return;
+        }
+
+        int codigo = proximoCodigo++;
+        categorias.add(new Categoria(codigo, nombre, descripcion));
+        System.out.println("Categoría agregada con código " + codigo + ".");
+    }
+
+    private void listarCategorias() {
+        if (categorias.isEmpty()) {
+            System.out.println("No hay categorías cargadas.");
+            return;
+        }
+        System.out.println("\n--- LISTADO DE CATEGORÍAS ---");
+        for (Categoria c : categorias) {
+            System.out.println(c);
+        }
+    }
+
+    private void consultarCategoria() {
+        System.out.print("Ingrese código de la categoría: ");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+        Categoria c = buscarPorCodigo(codigo);
+        if (c == null) {
+            System.out.println("Categoría no encontrada.");
+        } else {
+            System.out.println(c);
+        }
+    }
+
+    private void modificarCategoria() {
+        System.out.print("Ingrese código de la categoría a modificar: ");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+        Categoria c = buscarPorCodigo(codigo);
+        if (c == null) {
+            System.out.println("Categoría no encontrada.");
+            return;
+        }
+        System.out.println("Categoría actual: " + c);
+
+        System.out.print("Nuevo nombre (Enter para mantener): ");
+        String nuevoNombre = scanner.nextLine();
+        if (!nuevoNombre.isEmpty()) {
+            if (existeNombre(nuevoNombre)) {
+                System.out.println("Ya existe una categoría con ese nombre. No se modificó.");
+                return;
+            }
+            c.setNombre(nuevoNombre);
+        }
+
+        System.out.print("Nueva descripción (Enter para mantener): ");
+        String nuevaDescripcion = scanner.nextLine();
+        if (!nuevaDescripcion.isEmpty()) {
+            c.setDescripcion(nuevaDescripcion);
+        }
+
+        System.out.println("Categoría modificada.");
+    }
+
+    private void eliminarCategoria() {
+        System.out.print("Ingrese código de la categoría a eliminar: ");
+        int codigo = scanner.nextInt();
+        scanner.nextLine();
+        Categoria c = buscarPorCodigo(codigo);
+        if (c == null) {
+            System.out.println("Categoría no encontrada.");
+            return;
+        }
+        if (categoriaTieneArticulosAsociados(codigo)) {
+            System.out.println("No se puede eliminar: la categoría tiene artículos asociados.");
+            return;
+        }
+        categorias.remove(c);
+        System.out.println("Categoría eliminada.");
+    }
+
+    private boolean categoriaTieneArticulosAsociados(int codigoCategoria) {
+        for (Articulo a : articulos) {
+            if (a.getCategoria().getCodigo() == codigoCategoria) return true;
+        }
+        return false;
+    }
+
+    private Categoria buscarPorCodigo(int codigo) {
+        for (Categoria c : categorias) {
+            if (c.getCodigo() == codigo) return c;
+        }
+        return null;
+    }
+
+    private boolean existeNombre(String nombre) {
+        for (Categoria c : categorias) {
+            if (c.getNombre().equalsIgnoreCase(nombre)) return true;
+        }
+        return false;
+    }
 }

@@ -10,12 +10,13 @@ import java.util.Scanner;
 
 public class MenuArticulos extends Menu {
 
-    private ArrayList<Articulo> articulos = new ArrayList<>();
+    private ArrayList<Articulo> articulos;
     private ArrayList<Categoria> categorias;
     private int proximoCodigo = 1;
 
-    public MenuArticulos(Scanner scanner, ArrayList<Categoria> categorias) {
+    public MenuArticulos(Scanner scanner, ArrayList<Articulo> articulos, ArrayList<Categoria> categorias) {
         super(scanner);
+        this.articulos = articulos;
         this.categorias = categorias;
     }
 

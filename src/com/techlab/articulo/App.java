@@ -71,6 +71,7 @@ import java.util.Scanner;
 // Importamos los menús que luego deberán completarse.
 import com.techlab.articulo.menu.MenuArticulos;
 import com.techlab.articulo.menu.MenuCategorias;
+import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.Categoria;
 
 public class App {
@@ -109,8 +110,9 @@ public class App {
         // Crear aquí los repositorios genéricos.
 
         ArrayList<Categoria> categorias = new ArrayList<>();
-        MenuArticulos menuArticulos = new MenuArticulos(scanner, categorias);
-        MenuCategorias menuCategorias = new MenuCategorias(scanner, categorias);
+        ArrayList<Articulo> articulos = new ArrayList<>();
+        MenuArticulos menuArticulos = new MenuArticulos(scanner, articulos, categorias);
+        MenuCategorias menuCategorias = new MenuCategorias(scanner, categorias, articulos);
 
         int eleccion;
         do {
