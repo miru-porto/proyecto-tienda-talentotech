@@ -28,15 +28,17 @@ package com.techlab.articulo.utils;
  */
 public final class Secuencias {
 
-    // TODO:
-    // Crear atributos static para llevar la secuencia.
+    private static int proximoCodigoArticulo = 1;
+    private static int proximoCodigoCategoria = 1;
 
     private Secuencias() {
     }
 
-    // TODO:
-    // Implementar generarCodigoArticulo()
+    public static int generarCodigoArticulo() {
+        return proximoCodigoArticulo++;
+    }
 
-    // TODO:
-    // Implementar generarCodigoCategoria()
+    public static int generarCodigoCategoria() {
+        return proximoCodigoCategoria++;
+    }
 }
