@@ -17,6 +17,5 @@ package com.techlab.articulo.interfaces;
  */
 public interface Calculable {
 
-    // TODO:
-    // Declarar el método calcularPrecioFinal().
+    double calcularPrecioFinal();
 }

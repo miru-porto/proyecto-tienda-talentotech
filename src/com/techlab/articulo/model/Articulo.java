@@ -87,10 +87,6 @@ public abstract class Articulo implements Calculable, Identificable {
 
     @Override
     public String toString() {
-        // TODO:
-        // Mostrar todos los datos comunes del artículo.
-        // Sugerencia:
-        // incluir también tipo y precio final.
-        return nombre + " - " + precio + " - " + categoria;
+        return "Código: " + codigo + " | " + nombre + " | Precio: " + precio + " | Categoría: " + categoria.getNombre();
     }
 }
