@@ -45,6 +45,7 @@ package com.techlab.articulo.menu;
 
 import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.Categoria;
+import com.techlab.articulo.utils.Validaciones;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -95,7 +96,7 @@ public class MenuCategorias extends Menu {
     private void ingresarCategoria() {
         System.out.print("Nombre de la categoría: ");
         String nombre = scanner.nextLine();
-        if (nombre.isEmpty()) {
+        if (!Validaciones.validarTextoNoVacio(nombre)) {
             System.out.println("El nombre no puede estar vacío.");
             return;
         }
@@ -106,7 +107,7 @@ public class MenuCategorias extends Menu {
 
         System.out.print("Descripción: ");
         String descripcion = scanner.nextLine();
-        if (descripcion.isEmpty()) {
+        if (!Validaciones.validarTextoNoVacio(descripcion)) {
             System.out.println("La descripción no puede estar vacía.");
             return;
         }
@@ -152,7 +153,7 @@ public class MenuCategorias extends Menu {
 
         System.out.print("Nuevo nombre (Enter para mantener): ");
         String nuevoNombre = scanner.nextLine();
-        if (!nuevoNombre.isEmpty()) {
+        if (Validaciones.validarTextoNoVacio(nuevoNombre)) {
             if (existeNombre(nuevoNombre)) {
                 System.out.println("Ya existe una categoría con ese nombre. No se modificó.");
                 return;
@@ -162,7 +163,7 @@ public class MenuCategorias extends Menu {
 
         System.out.print("Nueva descripción (Enter para mantener): ");
         String nuevaDescripcion = scanner.nextLine();
-        if (!nuevaDescripcion.isEmpty()) {
+        if (Validaciones.validarTextoNoVacio(nuevaDescripcion)) {
             c.setDescripcion(nuevaDescripcion);
         }
 

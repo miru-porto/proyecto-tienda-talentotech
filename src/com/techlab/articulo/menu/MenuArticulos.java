@@ -4,6 +4,7 @@ import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.ArticuloAlimenticio;
 import com.techlab.articulo.model.ArticuloElectronico;
 import com.techlab.articulo.model.Categoria;
+import com.techlab.articulo.utils.Validaciones;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -127,7 +128,7 @@ public class MenuArticulos extends Menu {
         System.out.println("Artículo actual: " + a);
         System.out.print("Nuevo nombre (Enter para mantener): ");
         String nuevoNombre = scanner.nextLine();
-        if (!nuevoNombre.isEmpty()) {
+        if (Validaciones.validarTextoNoVacio(nuevoNombre)) {
             a.setNombre(nuevoNombre);
         }
         System.out.print("Nuevo precio (0 para mantener): ");
@@ -167,28 +168,53 @@ public class MenuArticulos extends Menu {
     }
 
     private String pedirNombreArticulo() {
-        System.out.print("Nombre del artículo: ");
-        return scanner.nextLine();
+        String nombre;
+        do {
+            System.out.print("Nombre del artículo: ");
+            nombre = scanner.nextLine();
+            if (!Validaciones.validarTextoNoVacio(nombre)) {
+                System.out.println("El nombre no puede estar vacío.");
+            }
+        } while (!Validaciones.validarTextoNoVacio(nombre));
+        return nombre;
     }
 
     private double pedirPrecioArticulo() {
-        System.out.print("Precio: ");
-        double precio = scanner.nextDouble();
-        scanner.nextLine();
+        double precio;
+        do {
+            System.out.print("Precio: ");
+            precio = scanner.nextDouble();
+            scanner.nextLine();
+            if (!Validaciones.validarNoNegativo(precio)) {
+                System.out.println("El precio no puede ser negativo.");
+            }
+        } while (!Validaciones.validarNoNegativo(precio));
         return precio;
     }
 
     private int pedirGarantia() {
-        System.out.print("Garantía en meses: ");
-        int g = scanner.nextInt();
-        scanner.nextLine();
+        int g;
+        do {
+            System.out.print("Garantía en meses: ");
+            g = scanner.nextInt();
+            scanner.nextLine();
+            if (!Validaciones.validarNoNegativo(g)) {
+                System.out.println("La garantía no puede ser negativa.");
+            }
+        } while (!Validaciones.validarNoNegativo(g));
         return g;
     }
 
     private int pedirDiasParaVencimiento() {
-        System.out.print("Días para vencimiento: ");
-        int d = scanner.nextInt();
-        scanner.nextLine();
+        int d;
+        do {
+            System.out.print("Días para vencimiento: ");
+            d = scanner.nextInt();
+            scanner.nextLine();
+            if (!Validaciones.validarNoNegativo(d)) {
+                System.out.println("Los días no pueden ser negativos.");
+            }
+        } while (!Validaciones.validarNoNegativo(d));
         return d;
     }
 
