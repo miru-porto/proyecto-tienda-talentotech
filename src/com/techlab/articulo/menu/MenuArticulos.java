@@ -4,6 +4,7 @@ import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.ArticuloAlimenticio;
 import com.techlab.articulo.model.ArticuloElectronico;
 import com.techlab.articulo.model.Categoria;
+import com.techlab.articulo.utils.Secuencias;
 import com.techlab.articulo.utils.Validaciones;
 
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ public class MenuArticulos extends Menu {
 
     private ArrayList<Articulo> articulos;
     private ArrayList<Categoria> categorias;
-    private int proximoCodigo = 1;
 
     public MenuArticulos(Scanner scanner, ArrayList<Articulo> articulos, ArrayList<Categoria> categorias) {
         super(scanner);
@@ -74,23 +74,21 @@ public class MenuArticulos extends Menu {
         int tipo = scanner.nextInt();
         scanner.nextLine();
 
-        int codigo = proximoCodigo++;
         Articulo articulo;
 
         if (tipo == 1) {
             int garantia = pedirGarantia();
-            articulo = new ArticuloElectronico(codigo, nombre, precio, categoria, garantia);
+            articulo = new ArticuloElectronico(Secuencias.generarCodigoArticulo(), nombre, precio, categoria, garantia);
         } else if (tipo == 2) {
             int dias = pedirDiasParaVencimiento();
-            articulo = new ArticuloAlimenticio(codigo, nombre, precio, categoria, dias);
+            articulo = new ArticuloAlimenticio(Secuencias.generarCodigoArticulo(), nombre, precio, categoria, dias);
         } else {
             System.out.println("Tipo inválido. Artículo no creado.");
-            proximoCodigo--;
             return;
         }
 
         articulos.add(articulo);
-        System.out.println("Artículo agregado con código " + codigo + ".");
+        System.out.println("Artículo agregado con código " + articulo.getCodigo() + ".");
     }
 
     private void listarArticulos() {

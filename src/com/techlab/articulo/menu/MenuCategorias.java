@@ -45,6 +45,7 @@ package com.techlab.articulo.menu;
 
 import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.Categoria;
+import com.techlab.articulo.utils.Secuencias;
 import com.techlab.articulo.utils.Validaciones;
 
 import java.util.ArrayList;
@@ -54,7 +55,6 @@ public class MenuCategorias extends Menu {
 
     private ArrayList<Categoria> categorias;
     private ArrayList<Articulo> articulos;
-    private int proximoCodigo = 1;
 
     public MenuCategorias(Scanner scanner, ArrayList<Categoria> categorias, ArrayList<Articulo> articulos) {
         super(scanner);
@@ -112,7 +112,7 @@ public class MenuCategorias extends Menu {
             return;
         }
 
-        int codigo = proximoCodigo++;
+        int codigo = Secuencias.generarCodigoCategoria();
         categorias.add(new Categoria(codigo, nombre, descripcion));
         System.out.println("Categoría agregada con código " + codigo + ".");
     }
