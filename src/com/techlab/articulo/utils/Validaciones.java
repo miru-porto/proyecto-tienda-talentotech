@@ -29,6 +29,19 @@ public final class Validaciones {
     private Validaciones() {
     }
 
-    // TODO:
-    // Implementar validaciones necesarias.
+    public static boolean validarTextoNoVacio(String texto) {
+        return texto != null && !texto.trim().isEmpty();
+    }
+
+    public static boolean validarLongitudMaxima(String texto, int maximo) {
+        return texto != null && texto.length() <= maximo;
+    }
+
+    public static boolean validarNoNegativo(int valor) {
+        return valor >= 0;
+    }
+
+    public static boolean validarNoNegativo(double valor) {
+        return valor >= 0;
+    }
 }
