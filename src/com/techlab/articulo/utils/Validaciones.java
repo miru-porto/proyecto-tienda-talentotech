@@ -37,11 +37,11 @@ public final class Validaciones {
         return texto != null && texto.length() <= maximo;
     }
 
-    public static boolean validarNoNegativo(int valor) {
-        return valor >= 0;
+    public static boolean validarPositivo(int valor) {
+        return valor > 0;
     }
 
-    public static boolean validarNoNegativo(double valor) {
-        return valor >= 0;
+    public static boolean validarPositivo(double valor) {
+        return valor > 0;
     }
 }

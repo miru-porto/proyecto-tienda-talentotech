@@ -139,7 +139,7 @@ public class MenuArticulos extends Menu {
     }
 
     private int pedirCodigoArticulo() {
-        return leerEntero("Ingrese código del artículo: ");
+        return leerEnteroPositivo("Ingrese código del artículo: ");
     }
 
     private Categoria pedirCategoriaExistente() {
@@ -147,7 +147,7 @@ public class MenuArticulos extends Menu {
         for (Categoria c : categorias) {
             System.out.println("  " + c.getCodigo() + " - " + c);
         }
-        int codigo = leerEntero("Ingrese código de categoría: ");
+        int codigo = leerEnteroPositivo("Ingrese código de categoría: ");
         for (Categoria c : categorias) {
             if (c.getCodigo() == codigo) return c;
         }
@@ -166,36 +166,15 @@ public class MenuArticulos extends Menu {
     }
 
     private double pedirPrecioArticulo() {
-        double precio;
-        do {
-            precio = leerDouble("Precio: ");
-            if (!Validaciones.validarNoNegativo(precio)) {
-                System.out.println("El precio no puede ser negativo.");
-            }
-        } while (!Validaciones.validarNoNegativo(precio));
-        return precio;
+        return leerDoublePositivo("Precio: ");
     }
 
     private int pedirGarantia() {
-        int g;
-        do {
-            g = leerEntero("Garantía en meses: ");
-            if (!Validaciones.validarNoNegativo(g)) {
-                System.out.println("La garantía no puede ser negativa.");
-            }
-        } while (!Validaciones.validarNoNegativo(g));
-        return g;
+        return leerEnteroPositivo("Garantía en meses: ");
     }
 
     private int pedirDiasParaVencimiento() {
-        int d;
-        do {
-            d = leerEntero("Días para vencimiento: ");
-            if (!Validaciones.validarNoNegativo(d)) {
-                System.out.println("Los días no pueden ser negativos.");
-            }
-        } while (!Validaciones.validarNoNegativo(d));
-        return d;
+        return leerEnteroPositivo("Días para vencimiento: ");
     }
 
     private Articulo buscarPorCodigo(int codigo) {

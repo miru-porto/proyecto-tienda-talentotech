@@ -125,7 +125,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void consultarCategoria() {
-        int codigo = leerEntero("Ingrese código de la categoría: ");
+        int codigo = pedirCodigoCategoria();
         Categoria c = buscarPorCodigo(codigo);
         if (c == null) {
             System.out.println("Categoría no encontrada.");
@@ -135,7 +135,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void modificarCategoria() {
-        int codigo = leerEntero("Ingrese código de la categoría a modificar: ");
+        int codigo = pedirCodigoCategoria();
         Categoria c = buscarPorCodigo(codigo);
         if (c == null) {
             System.out.println("Categoría no encontrada.");
@@ -161,7 +161,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void eliminarCategoria() {
-        int codigo = leerEntero("Ingrese código de la categoría a eliminar: ");
+        int codigo = pedirCodigoCategoria();
         Categoria c = buscarPorCodigo(codigo);
         if (c == null) {
             System.out.println("Categoría no encontrada.");
@@ -180,6 +180,10 @@ public class MenuCategorias extends Menu {
             if (a.getCategoria().getCodigo() == codigoCategoria) return true;
         }
         return false;
+    }
+
+    private int pedirCodigoCategoria() {
+        return leerEnteroPositivo("Ingrese código de la categoría: ");
     }
 
     private Categoria buscarPorCodigo(int codigo) {

@@ -1,5 +1,6 @@
 package com.techlab.articulo.menu;
 
+import com.techlab.articulo.utils.Validaciones;
 import java.util.Scanner;
 
 /**
@@ -60,5 +61,27 @@ public abstract class Menu {
     protected String leerTexto(String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine();
+    }
+
+    protected int leerEnteroPositivo(String mensaje) {
+        int valor;
+        do {
+            valor = leerEntero(mensaje);
+            if (!Validaciones.validarPositivo(valor)) {
+                System.out.println("Debe ingresar un número positivo.");
+            }
+        } while (!Validaciones.validarPositivo(valor));
+        return valor;
+    }
+
+    protected double leerDoublePositivo(String mensaje) {
+        double valor;
+        do {
+            valor = leerDouble(mensaje);
+            if (!Validaciones.validarPositivo(valor)) {
+                System.out.println("Debe ingresar un número positivo.");
+            }
+        } while (!Validaciones.validarPositivo(valor));
+        return valor;
     }
 }
