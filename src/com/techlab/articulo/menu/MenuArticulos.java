@@ -103,8 +103,7 @@ public class MenuArticulos extends Menu {
     }
 
     private void consultarArticulo() {
-        System.out.print("Ingrese código del artículo: ");
-        int codigo = scanner.nextInt();
+        int codigo = pedirCodigoArticulo();
         scanner.nextLine();
         Articulo a = buscarPorCodigo(codigo);
         if (a == null) {
@@ -115,8 +114,7 @@ public class MenuArticulos extends Menu {
     }
 
     private void modificarArticulo() {
-        System.out.print("Ingrese código del artículo a modificar: ");
-        int codigo = scanner.nextInt();
+        int codigo = pedirCodigoArticulo();
         scanner.nextLine();
         Articulo a = buscarPorCodigo(codigo);
         if (a == null) {
@@ -139,8 +137,7 @@ public class MenuArticulos extends Menu {
     }
 
     private void eliminarArticulo() {
-        System.out.print("Ingrese código del artículo a eliminar: ");
-        int codigo = scanner.nextInt();
+        int codigo = pedirCodigoArticulo();
         scanner.nextLine();
         Articulo a = buscarPorCodigo(codigo);
         if (a == null) {
@@ -151,13 +148,18 @@ public class MenuArticulos extends Menu {
         System.out.println("Artículo eliminado.");
     }
 
+    // Funciones auxiliares
+    private int pedirCodigoArticulo() {
+        System.out.print("Ingrese código del artículo a modificar: ");
+        return scanner.nextInt();
+    }
+
     private Categoria pedirCategoriaExistente() {
         System.out.println("\nCategorías disponibles:");
         for (Categoria c : categorias) {
             System.out.println("  " + c.getCodigo() + " - " + c);
         }
-        System.out.print("Ingrese código de categoría: ");
-        int codigo = scanner.nextInt();
+        int codigo = pedirCodigoArticulo();
         scanner.nextLine();
         for (Categoria c : categorias) {
             if (c.getCodigo() == codigo) return c;
