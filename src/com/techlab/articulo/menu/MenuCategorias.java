@@ -78,9 +78,7 @@ public class MenuCategorias extends Menu {
         int eleccion;
         do {
             mostrarMenu();
-            System.out.print("Elija una opción: ");
-            eleccion = scanner.nextInt();
-            scanner.nextLine();
+            eleccion = leerEntero("Elija una opción: ");
             switch (eleccion) {
                 case 1: ingresarCategoria(); break;
                 case 2: listarCategorias(); break;
@@ -94,8 +92,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void ingresarCategoria() {
-        System.out.print("Nombre de la categoría: ");
-        String nombre = scanner.nextLine();
+        String nombre = leerTexto("Nombre de la categoría: ");
         if (!Validaciones.validarTextoNoVacio(nombre)) {
             System.out.println("El nombre no puede estar vacío.");
             return;
@@ -105,8 +102,7 @@ public class MenuCategorias extends Menu {
             return;
         }
 
-        System.out.print("Descripción: ");
-        String descripcion = scanner.nextLine();
+        String descripcion = leerTexto("Descripción: ");
         if (!Validaciones.validarTextoNoVacio(descripcion)) {
             System.out.println("La descripción no puede estar vacía.");
             return;
@@ -129,9 +125,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void consultarCategoria() {
-        System.out.print("Ingrese código de la categoría: ");
-        int codigo = scanner.nextInt();
-        scanner.nextLine();
+        int codigo = leerEntero("Ingrese código de la categoría: ");
         Categoria c = buscarPorCodigo(codigo);
         if (c == null) {
             System.out.println("Categoría no encontrada.");
@@ -141,9 +135,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void modificarCategoria() {
-        System.out.print("Ingrese código de la categoría a modificar: ");
-        int codigo = scanner.nextInt();
-        scanner.nextLine();
+        int codigo = leerEntero("Ingrese código de la categoría a modificar: ");
         Categoria c = buscarPorCodigo(codigo);
         if (c == null) {
             System.out.println("Categoría no encontrada.");
@@ -151,8 +143,7 @@ public class MenuCategorias extends Menu {
         }
         System.out.println("Categoría actual: " + c);
 
-        System.out.print("Nuevo nombre (Enter para mantener): ");
-        String nuevoNombre = scanner.nextLine();
+        String nuevoNombre = leerTexto("Nuevo nombre (Enter para mantener): ");
         if (Validaciones.validarTextoNoVacio(nuevoNombre)) {
             if (existeNombre(nuevoNombre)) {
                 System.out.println("Ya existe una categoría con ese nombre. No se modificó.");
@@ -161,8 +152,7 @@ public class MenuCategorias extends Menu {
             c.setNombre(nuevoNombre);
         }
 
-        System.out.print("Nueva descripción (Enter para mantener): ");
-        String nuevaDescripcion = scanner.nextLine();
+        String nuevaDescripcion = leerTexto("Nueva descripción (Enter para mantener): ");
         if (Validaciones.validarTextoNoVacio(nuevaDescripcion)) {
             c.setDescripcion(nuevaDescripcion);
         }
@@ -171,9 +161,7 @@ public class MenuCategorias extends Menu {
     }
 
     private void eliminarCategoria() {
-        System.out.print("Ingrese código de la categoría a eliminar: ");
-        int codigo = scanner.nextInt();
-        scanner.nextLine();
+        int codigo = leerEntero("Ingrese código de la categoría a eliminar: ");
         Categoria c = buscarPorCodigo(codigo);
         if (c == null) {
             System.out.println("Categoría no encontrada.");

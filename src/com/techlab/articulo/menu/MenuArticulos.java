@@ -37,9 +37,7 @@ public class MenuArticulos extends Menu {
         int eleccion;
         do {
             mostrarMenu();
-            System.out.print("Elija una opción: ");
-            eleccion = scanner.nextInt();
-            scanner.nextLine();
+            eleccion = leerEntero("Elija una opción: ");
             switch (eleccion) {
                 case 1: ingresarArticulo(); break;
                 case 2: listarArticulos(); break;
@@ -70,9 +68,7 @@ public class MenuArticulos extends Menu {
         System.out.println("Tipo de artículo:");
         System.out.println("  1 - Electrónico");
         System.out.println("  2 - Alimenticio");
-        System.out.print("Elija: ");
-        int tipo = scanner.nextInt();
-        scanner.nextLine();
+        int tipo = leerEntero("Elija: ");
 
         Articulo articulo;
 
@@ -104,7 +100,6 @@ public class MenuArticulos extends Menu {
 
     private void consultarArticulo() {
         int codigo = pedirCodigoArticulo();
-        scanner.nextLine();
         Articulo a = buscarPorCodigo(codigo);
         if (a == null) {
             System.out.println("Artículo no encontrado.");
@@ -115,21 +110,17 @@ public class MenuArticulos extends Menu {
 
     private void modificarArticulo() {
         int codigo = pedirCodigoArticulo();
-        scanner.nextLine();
         Articulo a = buscarPorCodigo(codigo);
         if (a == null) {
             System.out.println("Artículo no encontrado.");
             return;
         }
         System.out.println("Artículo actual: " + a);
-        System.out.print("Nuevo nombre (Enter para mantener): ");
-        String nuevoNombre = scanner.nextLine();
+        String nuevoNombre = leerTexto("Nuevo nombre (Enter para mantener): ");
         if (Validaciones.validarTextoNoVacio(nuevoNombre)) {
             a.setNombre(nuevoNombre);
         }
-        System.out.print("Nuevo precio (0 para mantener): ");
-        double nuevoPrecio = scanner.nextDouble();
-        scanner.nextLine();
+        double nuevoPrecio = leerDouble("Nuevo precio (0 para mantener): ");
         if (nuevoPrecio > 0) {
             a.setPrecio(nuevoPrecio);
         }
@@ -138,7 +129,6 @@ public class MenuArticulos extends Menu {
 
     private void eliminarArticulo() {
         int codigo = pedirCodigoArticulo();
-        scanner.nextLine();
         Articulo a = buscarPorCodigo(codigo);
         if (a == null) {
             System.out.println("Artículo no encontrado.");
@@ -148,10 +138,8 @@ public class MenuArticulos extends Menu {
         System.out.println("Artículo eliminado.");
     }
 
-    // Funciones auxiliares
     private int pedirCodigoArticulo() {
-        System.out.print("Ingrese código del artículo a modificar: ");
-        return scanner.nextInt();
+        return leerEntero("Ingrese código del artículo: ");
     }
 
     private Categoria pedirCategoriaExistente() {
@@ -159,8 +147,7 @@ public class MenuArticulos extends Menu {
         for (Categoria c : categorias) {
             System.out.println("  " + c.getCodigo() + " - " + c);
         }
-        int codigo = pedirCodigoArticulo();
-        scanner.nextLine();
+        int codigo = leerEntero("Ingrese código de categoría: ");
         for (Categoria c : categorias) {
             if (c.getCodigo() == codigo) return c;
         }
@@ -170,8 +157,7 @@ public class MenuArticulos extends Menu {
     private String pedirNombreArticulo() {
         String nombre;
         do {
-            System.out.print("Nombre del artículo: ");
-            nombre = scanner.nextLine();
+            nombre = leerTexto("Nombre del artículo: ");
             if (!Validaciones.validarTextoNoVacio(nombre)) {
                 System.out.println("El nombre no puede estar vacío.");
             }
@@ -182,9 +168,7 @@ public class MenuArticulos extends Menu {
     private double pedirPrecioArticulo() {
         double precio;
         do {
-            System.out.print("Precio: ");
-            precio = scanner.nextDouble();
-            scanner.nextLine();
+            precio = leerDouble("Precio: ");
             if (!Validaciones.validarNoNegativo(precio)) {
                 System.out.println("El precio no puede ser negativo.");
             }
@@ -195,9 +179,7 @@ public class MenuArticulos extends Menu {
     private int pedirGarantia() {
         int g;
         do {
-            System.out.print("Garantía en meses: ");
-            g = scanner.nextInt();
-            scanner.nextLine();
+            g = leerEntero("Garantía en meses: ");
             if (!Validaciones.validarNoNegativo(g)) {
                 System.out.println("La garantía no puede ser negativa.");
             }
@@ -208,9 +190,7 @@ public class MenuArticulos extends Menu {
     private int pedirDiasParaVencimiento() {
         int d;
         do {
-            System.out.print("Días para vencimiento: ");
-            d = scanner.nextInt();
-            scanner.nextLine();
+            d = leerEntero("Días para vencimiento: ");
             if (!Validaciones.validarNoNegativo(d)) {
                 System.out.println("Los días no pueden ser negativos.");
             }

@@ -43,6 +43,22 @@ public abstract class Menu {
     // Declarar método abstracto para ejecutar el menú.
     public abstract void ejecutar();
 
-    // TODO:
-    // Agregar métodos auxiliares de lectura segura si querés reutilizar lógica.
+    protected int leerEntero(String mensaje) {
+        System.out.print(mensaje);
+        int valor = scanner.nextInt();
+        scanner.nextLine();
+        return valor;
+    }
+
+    protected double leerDouble(String mensaje) {
+        System.out.print(mensaje);
+        double valor = scanner.nextDouble();
+        scanner.nextLine();
+        return valor;
+    }
+
+    protected String leerTexto(String mensaje) {
+        System.out.print(mensaje);
+        return scanner.nextLine();
+    }
 }
