@@ -31,8 +31,8 @@ public class ArticuloElectronico extends Articulo {
 
     private int garantiaMeses;
 
-    public ArticuloElectronico(int codigo, String nombre, double precio, Categoria categoria, int garantiaMeses) {
-        super(codigo, nombre, precio, categoria);
+    public ArticuloElectronico(int codigo, String nombre, double precio, int stock, int garantiaMeses) {
+        super(codigo, nombre, precio, stock);
         this.garantiaMeses = garantiaMeses;
     }
 
@@ -59,8 +59,8 @@ public class ArticuloElectronico extends Articulo {
     public String toString() {
         return "[" + getTipoArticulo() + "] Código: " + codigo
                 + " | " + nombre
-                + " | Precio final: $" + calcularPrecioFinal()
-                + " | Garantía: " + garantiaMeses + " meses"
-                + " | Categoría: " + categoria;
+                + " | Precio: $" + precio
+                + " | Stock: " + stock
+                + " | Garantía: " + garantiaMeses + " meses";
     }
 }

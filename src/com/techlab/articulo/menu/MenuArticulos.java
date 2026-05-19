@@ -3,7 +3,6 @@ package com.techlab.articulo.menu;
 import com.techlab.articulo.model.Articulo;
 import com.techlab.articulo.model.ArticuloAlimenticio;
 import com.techlab.articulo.model.ArticuloElectronico;
-import com.techlab.articulo.model.Categoria;
 import com.techlab.articulo.utils.Secuencias;
 import com.techlab.articulo.utils.Validaciones;
 
@@ -13,12 +12,10 @@ import java.util.Scanner;
 public class MenuArticulos extends Menu {
 
     private ArrayList<Articulo> articulos;
-    private ArrayList<Categoria> categorias;
 
-    public MenuArticulos(Scanner scanner, ArrayList<Articulo> articulos, ArrayList<Categoria> categorias) {
+    public MenuArticulos(Scanner scanner, ArrayList<Articulo> articulos) {
         super(scanner);
         this.articulos = articulos;
-        this.categorias = categorias;
     }
 
     @Override
@@ -26,9 +23,8 @@ public class MenuArticulos extends Menu {
         System.out.println("\n--- MENÚ ARTÍCULOS ---");
         System.out.println("1 - Ingresar artículo");
         System.out.println("2 - Listar artículos");
-        System.out.println("3 - Consultar artículo");
-        System.out.println("4 - Modificar artículo");
-        System.out.println("5 - Eliminar artículo");
+        System.out.println("3 - Modificar artículo");
+        System.out.println("4 - Eliminar artículo");
         System.out.println("0 - Volver");
     }
 
@@ -41,9 +37,8 @@ public class MenuArticulos extends Menu {
             switch (eleccion) {
                 case 1: ingresarArticulo(); break;
                 case 2: listarArticulos(); break;
-                case 3: consultarArticulo(); break;
-                case 4: modificarArticulo(); break;
-                case 5: eliminarArticulo(); break;
+                case 3: modificarArticulo(); break;
+                case 4: eliminarArticulo(); break;
                 case 0: System.out.println("Volviendo al menú principal..."); break;
                 default: System.out.println("Opción inválida. Intente de nuevo.");
             }
@@ -51,19 +46,9 @@ public class MenuArticulos extends Menu {
     }
 
     private void ingresarArticulo() {
-        if (categorias.isEmpty()) {
-            System.out.println("No hay categorías disponibles. Cree una categoría primero.");
-            return;
-        }
-
-        Categoria categoria = pedirCategoriaExistente();
-        if (categoria == null) {
-            System.out.println("Categoría no encontrada.");
-            return;
-        }
-
         String nombre = pedirNombreArticulo();
         double precio = pedirPrecioArticulo();
+        int stock = leerEnteroPositivo("Stock inicial: ");
 
         System.out.println("Tipo de artículo:");
         System.out.println("  1 - Electrónico");
@@ -74,10 +59,10 @@ public class MenuArticulos extends Menu {
 
         if (tipo == 1) {
             int garantia = pedirGarantia();
-            articulo = new ArticuloElectronico(Secuencias.generarCodigoArticulo(), nombre, precio, categoria, garantia);
+            articulo = new ArticuloElectronico(Secuencias.generarCodigoArticulo(), nombre, precio, stock, garantia);
         } else if (tipo == 2) {
             int dias = pedirDiasParaVencimiento();
-            articulo = new ArticuloAlimenticio(Secuencias.generarCodigoArticulo(), nombre, precio, categoria, dias);
+            articulo = new ArticuloAlimenticio(Secuencias.generarCodigoArticulo(), nombre, precio, stock, dias);
         } else {
             System.out.println("Tipo inválido. Artículo no creado.");
             return;
@@ -94,16 +79,6 @@ public class MenuArticulos extends Menu {
         }
         System.out.println("\n--- LISTADO DE ARTÍCULOS ---");
         for (Articulo a : articulos) {
-            System.out.println(a);
-        }
-    }
-
-    private void consultarArticulo() {
-        int codigo = pedirCodigoArticulo();
-        Articulo a = buscarPorCodigo(codigo);
-        if (a == null) {
-            System.out.println("Artículo no encontrado.");
-        } else {
             System.out.println(a);
         }
     }
@@ -140,18 +115,6 @@ public class MenuArticulos extends Menu {
 
     private int pedirCodigoArticulo() {
         return leerEnteroPositivo("Ingrese código del artículo: ");
-    }
-
-    private Categoria pedirCategoriaExistente() {
-        System.out.println("\nCategorías disponibles:");
-        for (Categoria c : categorias) {
-            System.out.println("  " + c.getCodigo() + " - " + c);
-        }
-        int codigo = leerEnteroPositivo("Ingrese código de categoría: ");
-        for (Categoria c : categorias) {
-            if (c.getCodigo() == codigo) return c;
-        }
-        return null;
     }
 
     private String pedirNombreArticulo() {

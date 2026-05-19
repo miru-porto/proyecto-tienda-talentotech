@@ -29,7 +29,7 @@ package com.techlab.articulo.utils;
 public final class Secuencias {
 
     private static int proximoCodigoArticulo = 1;
-    private static int proximoCodigoCategoria = 1;
+    private static int proximoCodigoPedido = 1;
 
     private Secuencias() {
     }
@@ -38,7 +38,7 @@ public final class Secuencias {
         return proximoCodigoArticulo++;
     }
 
-    public static int generarCodigoCategoria() {
-        return proximoCodigoCategoria++;
+    public static int generarCodigoPedido() {
+        return proximoCodigoPedido++;
     }
 }

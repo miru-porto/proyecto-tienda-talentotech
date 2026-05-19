@@ -47,13 +47,13 @@ public abstract class Articulo implements Calculable, Identificable {
     protected int codigo;
     protected String nombre;
     protected double precio;
-    protected Categoria categoria;
+    protected int stock;
 
-    public Articulo(int codigo, String nombre, double precio, Categoria categoria) {
+    public Articulo(int codigo, String nombre, double precio, int stock) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
-        this.categoria = categoria;
+        this.stock = stock;
     }
 
     @Override
@@ -77,14 +77,18 @@ public abstract class Articulo implements Calculable, Identificable {
         this.precio = precio;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public abstract String getTipoArticulo();
 
     @Override
     public String toString() {
-        return "Código: " + codigo + " | " + nombre + " | Precio: " + precio + " | Categoría: " + categoria.getNombre();
+        return "Código: " + codigo + " | " + nombre + " | Precio: $" + precio + " | Stock: " + stock;
     }
 }

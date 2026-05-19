@@ -28,8 +28,8 @@ public class ArticuloAlimenticio extends Articulo {
 
     private int diasParaVencimiento;
 
-    public ArticuloAlimenticio(int codigo, String nombre, double precio, Categoria categoria, int diasParaVencimiento) {
-        super(codigo, nombre, precio, categoria);
+    public ArticuloAlimenticio(int codigo, String nombre, double precio, int stock, int diasParaVencimiento) {
+        super(codigo, nombre, precio, stock);
         this.diasParaVencimiento = diasParaVencimiento;
     }
 
@@ -56,8 +56,8 @@ public class ArticuloAlimenticio extends Articulo {
     public String toString() {
         return "[" + getTipoArticulo() + "] Código: " + codigo
                 + " | " + nombre
-                + " | Precio final: $" + calcularPrecioFinal()
-                + " | Vence en: " + diasParaVencimiento + " días"
-                + " | Categoría: " + categoria;
+                + " | Precio: $" + precio
+                + " | Stock: " + stock
+                + " | Vence en: " + diasParaVencimiento + " días";
     }
 }

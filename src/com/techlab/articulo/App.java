@@ -1,78 +1,12 @@
 package com.techlab.articulo;
 
-// ============================================================
-// CONSIGNA GENERAL DE LA PREENTREGA
-// ============================================================
-//
-// Desarrollar una aplicación en Java por consola que permita gestionar
-// artículos y categorías de una tienda.
-//
-// La aplicación deberá trabajar con:
-// - Programación Orientada a Objetos
-// - Clase abstracta
-// - Herencia
-// - Polimorfismo
-// - Interfaces
-// - Generics
-// - Relación entre objetos
-// - Menús separados
-//
-// ESTRUCTURA CONCEPTUAL ESPERADA
-// ------------------------------------------------------------
-// 1) Debe existir una clase abstracta Articulo con:
-//    - codigo
-//    - nombre
-//    - precio
-//    - categoria (objeto Categoria, NO String)
-//
-// 2) Deben existir dos clases hijas de Articulo:
-//    - ArticuloElectronico
-//    - ArticuloAlimenticio
-//
-// 3) Debe existir una clase Categoria con su propio CRUD.
-//
-// 4) Debe existir una interfaz Calculable con el método:
-//    - double calcularPrecioFinal();
-//
-// 5) Debe existir una interfaz Identificable con el método:
-//    - int getCodigo();
-//
-// 6) Debe existir un Repositorio<T extends Identificable>
-//    para administrar artículos y categorías en memoria.
-//
-// 7) Debe existir una clase base Menu y dos menús hijos:
-//    - MenuArticulos
-//    - MenuCategorias
-//
-// REGLAS DE NEGOCIO PRINCIPALES
-// ------------------------------------------------------------
-// - No se puede crear un artículo si no existen categorías cargadas.
-// - No se puede eliminar una categoría si tiene artículos asociados.
-// - Los códigos de artículos y categorías deben ser automáticos.
-// - Deben validarse todos los datos ingresados.
-// - No debe resolverse toda la lógica dentro del main.
-//
-// IMPORTANTE
-// ------------------------------------------------------------
-// Este proyecto se entrega como PLANTILLA.
-// Eso significa que:
-// - la estructura ya está armada,
-// - los nombres de las clases ya están definidos,
-// - y en cada archivo encontrarás instrucciones específicas
-//   sobre qué implementar.
-//
-// Tu tarea será completar cada clase respetando esta estructura.
-//
-
-// Importamos Scanner para leer datos por consola.
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Importamos los menús que luego deberán completarse.
 import com.techlab.articulo.menu.MenuArticulos;
-import com.techlab.articulo.menu.MenuCategorias;
+import com.techlab.articulo.menu.MenuPedidos;
 import com.techlab.articulo.model.Articulo;
-import com.techlab.articulo.model.Categoria;
+import com.techlab.articulo.model.Pedido;
 
 public class App {
 
@@ -106,13 +40,11 @@ public class App {
 
         Scanner scanner = new Scanner(System.in);
 
-        // TODO:
-        // Crear aquí los repositorios genéricos.
-
-        ArrayList<Categoria> categorias = new ArrayList<>();
         ArrayList<Articulo> articulos = new ArrayList<>();
-        MenuArticulos menuArticulos = new MenuArticulos(scanner, articulos, categorias);
-        MenuCategorias menuCategorias = new MenuCategorias(scanner, categorias, articulos);
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+
+        MenuArticulos menuArticulos = new MenuArticulos(scanner, articulos);
+        MenuPedidos menuPedidos = new MenuPedidos(scanner, articulos, pedidos);
 
         int eleccion;
         do {
@@ -120,14 +52,14 @@ public class App {
             System.out.println("   SISTEMA DE GESTIÓN - TECHLAB");
             System.out.println("========================================");
             System.out.println("1 - Gestionar artículos");
-            System.out.println("2 - Gestionar categorías");
+            System.out.println("2 - Gestionar pedidos");
             System.out.println("0 - Salir");
             System.out.print("Elija una opción: ");
             eleccion = scanner.nextInt();
             scanner.nextLine();
             switch (eleccion) {
                 case 1: menuArticulos.ejecutar(); break;
-                case 2: menuCategorias.ejecutar(); break;
+                case 2: menuPedidos.ejecutar(); break;
                 case 0: System.out.println("¡Hasta luego!"); break;
                 default: System.out.println("Opción inválida. Intente de nuevo.");
             }
